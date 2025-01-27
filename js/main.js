@@ -219,36 +219,28 @@ const initTypedText = () => {
 
 // Optimized Mobile Menu
 const initMobileMenu = () => {
-    const toggle = document.querySelector('.navbar-toggler');
-    const collapse = document.querySelector('.navbar-collapse');
-    const links = document.querySelectorAll('.nav-link');
     const navbar = document.querySelector('.navbar');
+    const collapse = document.querySelector('.navbar-collapse');
 
-    if (!toggle || !collapse || !navbar) return;
+    if (!navbar || !collapse) return;
 
-    // Prevent any navbar animation while menu is open
-    toggle.addEventListener('click', (e) => {
-        e.stopPropagation();
-        collapse.classList.toggle('show');
-        // Mencegah scroll saat menu terbuka
-        document.body.style.overflow = collapse.classList.contains('show') ? 'hidden' : '';
-        // Memastikan navbar tetap terlihat saat menu terbuka
+    // Handle scroll lock
+    collapse.addEventListener('show.bs.collapse', () => {
+        document.body.style.overflow = 'hidden';
         navbar.classList.remove('navbar-hidden');
     });
 
-    // Close menu when clicking links
-    links.forEach(link => {
-        link.addEventListener('click', () => {
-            collapse.classList.remove('show');
-            document.body.style.overflow = '';
-        });
+    collapse.addEventListener('hidden.bs.collapse', () => {
+        document.body.style.overflow = '';
     });
 
     // Close menu when clicking outside
     document.addEventListener('click', (e) => {
-        if (!navbar.contains(e.target) && collapse.classList.contains('show')) {
-            collapse.classList.remove('show');
-            document.body.style.overflow = '';
+        const isNavbar = navbar.contains(e.target);
+        const isCollapsed = !collapse.classList.contains('show');
+        
+        if (!isNavbar && !isCollapsed) {
+            bootstrap.Collapse.getInstance(collapse).hide();
         }
     });
 };
@@ -322,6 +314,32 @@ function calculateAge() {
     document.getElementById('age').textContent = age + ' years old';
 }
 
+// Calculate experience duration
+const calculateExperience = () => {
+    const startDate = new Date('2022-06-01');
+    const currentDate = new Date();
+    
+    const years = currentDate.getFullYear() - startDate.getFullYear();
+    const months = currentDate.getMonth() - startDate.getMonth();
+    let duration = years;
+    
+    if (months < 0) {
+        duration = years - 1;
+    }
+    
+    // Only update the experience duration stat
+    const expElements = document.querySelectorAll('.stat-item');
+    expElements.forEach(element => {
+        const label = element.querySelector('.stat-label');
+        if (label && label.textContent === 'Years Experience') {
+            const numberElement = element.querySelector('.stat-number');
+            if (numberElement) {
+                numberElement.textContent = duration + '+';
+            }
+        }
+    });
+};
+
 // Initialize everything when DOM is loaded
 document.addEventListener('DOMContentLoaded', () => {
     initLoader();
@@ -331,11 +349,13 @@ document.addEventListener('DOMContentLoaded', () => {
     initProjectCards();
     initCyberGrid();
     initSectionTitles();
+    initHeroAnimation();
     initTypedText();
+    initMobileMenu();
+    initProjectCarousels();
     initFooterYear();
     calculateAge();
-    initProjectCarousels();
-    initMobileMenu();
+    calculateExperience();
 });
 
 const initLoader = () => {
