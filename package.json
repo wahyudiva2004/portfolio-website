@@ -1,5 +1,6 @@
 {
   "dependencies": {
-    "@vercel/analytics": "^1.4.1"
+    "@vercel/analytics": "^1.4.1",
+    "@vercel/analytics/react": "^1.4.1"
   }
 }
