@@ -9,7 +9,8 @@ class Chatbot {
         
         this.initEventListeners();
         this.apiEndpoint = 'https://api-inference.huggingface.co/models/mistralai/Mistral-7B-Instruct-v0.2';
-        this.apiKey = config.HUGGING_FACE_API_KEY || '';
+        this.apiKey = '';
+        this.initApiKey();
         
         this.systemPrompt = `Kamu adalah asisten AI portfolio Wahyu Diva. WAJIB menggunakan Bahasa Indonesia yang baik dan benar dalam setiap jawaban. PENTING: Berikan jawaban yang LENGKAP dan TIDAK TERPOTONG.
 
@@ -94,6 +95,16 @@ class Chatbot {
         });
 
         this.addMessage("Halo! Saya asisten AI portfolio Wahyu Diva. Silakan tanyakan tentang pengalaman, proyek, atau keahlian teknis Wahyu. Saya juga bisa membantu menjawab pertanyaan seputar teknologi pengembangan web!", 'bot');
+    }
+
+    async initApiKey() {
+        try {
+            const response = await fetch('/api/config');
+            const data = await response.json();
+            this.apiKey = data.HUGGING_FACE_API_KEY;
+        } catch (error) {
+            console.error('Failed to load API key:', error);
+        }
     }
 
     toggleChat() {
