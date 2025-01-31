@@ -1,3 +1,0 @@
-window.ENV = {
-    HUGGING_FACE_API_KEY: '{{HUGGING_FACE_API_KEY}}'
-};

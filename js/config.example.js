@@ -1,3 +1,3 @@
 const config = {
-    HUGGING_FACE_API_KEY: 'your_api_key_here'
+    HUGGING_FACE_API_KEY: window.ENV_CONFIG?.HUGGING_FACE_API_KEY || ''
 };
