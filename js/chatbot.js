@@ -99,9 +99,14 @@ class Chatbot {
 
     async initApiKey() {
         try {
-            const response = await fetch('/api/config');
+            const baseUrl = window.location.origin;
+            const response = await fetch(`${baseUrl}/api/config`);
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
+            }
             const data = await response.json();
             this.apiKey = data.HUGGING_FACE_API_KEY;
+            console.log('API key loaded successfully');
         } catch (error) {
             console.error('Failed to load API key:', error);
         }
