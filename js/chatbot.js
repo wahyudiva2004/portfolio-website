@@ -119,13 +119,34 @@ class Chatbot {
         this.container.classList.toggle('active');
     }
 
+    addMessage(text, type) {
+        const messageDiv = document.createElement('div');
+        messageDiv.classList.add('message', `${type}-message`);
+        messageDiv.textContent = text;
+        this.messagesContainer.appendChild(messageDiv);
+        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+        return messageDiv;
+    }
+
+    addTypingIndicator() {
+        const indicator = document.createElement('div');
+        indicator.classList.add('typing-indicator');
+        for (let i = 0; i < 3; i++) {
+            const dot = document.createElement('span');
+            indicator.appendChild(dot);
+        }
+        this.messagesContainer.appendChild(indicator);
+        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
+        return indicator;
+    }
+
     async sendMessage() {
         const message = this.input.value.trim();
         if (!message) return;
 
         this.addMessage(message, 'user');
         this.input.value = '';
-        const typingIndicator = this.addMessage('Thinking...', 'bot');
+        const typingIndicator = this.addTypingIndicator();
 
         try {
             if (!this.apiKey) {
@@ -157,15 +178,6 @@ class Chatbot {
             this.addMessage('Maaf, terjadi kesalahan. Silakan coba lagi.', 'bot');
             console.error('Error:', error);
         }
-    }
-
-    addMessage(text, type) {
-        const messageDiv = document.createElement('div');
-        messageDiv.classList.add('message', `${type}-message`);
-        messageDiv.textContent = text;
-        this.messagesContainer.appendChild(messageDiv);
-        this.messagesContainer.scrollTop = this.messagesContainer.scrollHeight;
-        return messageDiv;
     }
 
     async getAIResponse(message) {

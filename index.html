@@ -347,24 +347,27 @@
     </footer>
 
     <!-- Chatbot -->
-    <div class="cyber-chatbot">
-        <div class="chatbot-toggle">
-            <i class="fas fa-robot"></i>
+    <div class="chatbot-toggle">
+        <i class="fas fa-comments"></i>
+        <span class="notification-dot"></span>
+    </div>
+    
+    <div class="chatbot-container">
+        <div class="chatbot-header">
+            <div class="chatbot-title">
+                <i class="fas fa-robot"></i>
+                <span>AI Assistant</span>
+            </div>
+            <button class="close-chat">
+                <i class="fas fa-times"></i>
+            </button>
         </div>
-        <div class="chatbot-container">
-            <div class="chatbot-header">
-                <h3>AI Assistant</h3>
-                <button class="close-chat">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="chatbot-messages"></div>
-            <div class="chatbot-input">
-                <input type="text" placeholder="Type your message..." id="chatInput">
-                <button class="send-message">
-                    <i class="fas fa-paper-plane"></i>
-                </button>
-            </div>
+        <div class="chatbot-messages"></div>
+        <div class="chatbot-input">
+            <input type="text" id="chatInput" placeholder="Ask me anything...">
+            <button class="send-message">
+                <i class="fas fa-paper-plane"></i>
+            </button>
         </div>
     </div>
 
