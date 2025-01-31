@@ -1,0 +1,10 @@
+{
+    "env": {
+        "HUGGING_FACE_API_KEY": "@hugging_face_api_key"
+    },
+    "build": {
+        "env": {
+            "HUGGING_FACE_API_KEY": "@hugging_face_api_key"
+        }
+    }
+}
