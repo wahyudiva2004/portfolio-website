@@ -4,11 +4,12 @@
   "description": "Personal portfolio website",
   "main": "index.js",
   "scripts": {
-    "dev": "vercel dev",
-    "build": "vercel build",
-    "start": "vercel start"
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
   },
   "dependencies": {
+    "next": "^14.0.0",
     "@vercel/node": "^3.0.0"
   }
 }
