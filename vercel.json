@@ -1,0 +1,14 @@
+{
+    "version": 2,
+    "builds": [
+        { "src": "**/*", "use": "@vercel/static" }
+    ],
+    "env": {
+        "HUGGING_FACE_API_KEY": "@hugging_face_api_key"
+    },
+    "build": {
+        "env": {
+            "HUGGING_FACE_API_KEY": "@hugging_face_api_key"
+        }
+    }
+}
