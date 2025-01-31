@@ -9,6 +9,6 @@
     "start": "vercel start"
   },
   "dependencies": {
-    "@vercel/edge": "^1.0.0"
+    "@vercel/node": "^3.0.0"
   }
 }
