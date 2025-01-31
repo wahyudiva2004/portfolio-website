@@ -4,4 +4,11 @@
 .env.development.local
 .env.test.local
 .env.production.local
-.js/config.js
+
+# Files containing sensitive data
+js/config.js
+js/env-config.js
+
+# Keep example files
+!js/config.example.js
+!js/env-config.example.js
